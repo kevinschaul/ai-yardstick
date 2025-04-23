@@ -1,6 +1,6 @@
 [project]
 name = "ai-yardstick"
-version = "0.1"
+version = "0.0.1"
 description = "A CLI tool for running and managing LLM evaluations"
 readme = "README.md"
 authors = [{name = "Kevin Schaul"}]
