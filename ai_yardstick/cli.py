@@ -135,7 +135,7 @@ def cache(cache_dir: str = None):
 
 
 # Directory for caching LLM responses
-CONFIG_CACHE_DIR = "./cached-llm-responses/"
+CONFIG_CACHE_DIR = "./.ai-yardstick-cache/"
 
 
 @cache()
@@ -467,8 +467,7 @@ def get_transform_function(transform_spec, default_func_name="transform_output")
 @click.group()
 @click.version_option()
 def cli():
-    """A CLI tool for running and managing LLM evaluations
-    """
+    """A CLI tool for running and managing LLM evaluations"""
     pass
 
 
@@ -477,25 +476,20 @@ def cli():
 def create(eval_name):
     """Create a new evaluation with the given name."""
     # Create directory structure
-    eval_dir = os.path.join("src/evals", eval_name)
-    if os.path.exists(eval_dir):
-        click.echo(f"Error: Evaluation '{eval_name}' already exists in {eval_dir}")
-        return
-
-    os.makedirs(eval_dir, exist_ok=True)
-    os.makedirs(os.path.join(eval_dir, "cached-llm-responses"), exist_ok=True)
-    os.makedirs(os.path.join(eval_dir, "results"), exist_ok=True)
+    os.makedirs(eval_name, exist_ok=True)
+    os.makedirs(os.path.join(eval_name, ".ai-yardstick-cache"), exist_ok=True)
+    os.makedirs(os.path.join(eval_name, "results"), exist_ok=True)
 
     # Create template files
-    create_config_template(eval_dir, eval_name)
-    create_template_files(eval_dir, eval_name)
+    create_config_template(eval_name, eval_name)
+    create_template_files(eval_name, eval_name)
 
-    click.echo(f"Created new evaluation '{eval_name}' in {eval_dir}")
+    click.echo(f"Created new evaluation in {eval_name}")
     click.echo(f"Next steps:")
-    click.echo(f"1. Add your models to {eval_dir}/models.csv")
-    click.echo(f"2. Add your prompts to {eval_dir}/prompts.csv")
-    click.echo(f"3. Add your test cases to {eval_dir}/tests.csv")
-    click.echo(f"4. Run: uv run cli/cli.py run {eval_dir}/llm-evals-config.yaml")
+    click.echo(f"1. Add your models to {eval_name}/models.csv")
+    click.echo(f"2. Add your prompts to {eval_name}/prompts.csv")
+    click.echo(f"3. Add your test cases to {eval_name}/tests.csv")
+    click.echo(f"4. Run: ai-yardstick run {eval_name}/ai-yardstick-config.yaml")
 
 
 @cli.command()
@@ -626,7 +620,7 @@ prompts: prompts.csv
 tests: tests.csv
 
 # Output settings
-cache_dir: cached-llm-responses
+cache_dir: .ai-yardstick-cache
 output_dir: results
 results_file: results.csv
 aggregate_file: aggregate.csv
@@ -634,7 +628,7 @@ aggregate_file: aggregate.csv
 # Optional: Custom transformation function
 # transform_func: parse_boolean  # Built-in function to parse YES/NO responses
 """
-    config_path = os.path.join(eval_dir, "llm-evals-config.yaml")
+    config_path = os.path.join(eval_dir, "ai-yardstick-config.yaml")
     with open(config_path, "w") as f:
         f.write(config_content)
 
@@ -677,7 +671,7 @@ gemini-1.5-flash"""
 - tests.csv: Test cases with expected outputs
 
 ## Running
-Run with: `uv run cli/cli.py run {os.path.join("src/evals", eval_name, "llm-evals-config.yaml")}`
+Run with: `uv run cli/cli.py run {os.path.join("src/evals", eval_name, "ai-yardstick-config.yaml")}`
 """
     with open(os.path.join(eval_dir, "index.md"), "w") as f:
         f.write(readme_content)
