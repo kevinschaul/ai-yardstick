@@ -1,0 +1,31 @@
+[project]
+name = "llm-evals-cli"
+version = "0.1"
+description = "A CLI for running LLM evals with pydantic"
+readme = "README.md"
+authors = [{name = "Kevin Schaul"}]
+license = "MIT"
+requires-python = ">=3.8"
+classifiers = []
+dependencies = [
+    "click",
+    "llm>=0.24",
+    "pandas>=2.2",
+    "pydantic_evals>=0.1.3",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/kevinschaul/llm-evals-cli"
+Changelog = "https://github.com/kevinschaul/llm-evals-cli/releases"
+Issues = "https://github.com/kevinschaul/llm-evals-cli/issues"
+CI = "https://github.com/kevinschaul/llm-evals-cli/actions"
+
+[project.scripts]
+llm-evals-cli = "llm_evals_cli.cli:cli"
+
+[project.optional-dependencies]
+test = ["pytest"]
