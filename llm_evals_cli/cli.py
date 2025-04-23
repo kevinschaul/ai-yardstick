@@ -465,18 +465,9 @@ def get_transform_function(transform_spec, default_func_name="transform_output")
 
 
 @click.group()
+@click.version_option()
 def cli():
-    """LLM Evals - A CLI tool for running and managing LLM evaluations.
-
-    Examples:
-      Create a new evaluation:
-        uv run cli/cli.py create my-new-eval
-
-      Run an evaluation:
-        uv run cli/cli.py run src/evals/my-eval/llm-evals-config.yaml
-
-      View results in browser:
-        uv run cli/cli.py view
+    """A CLI tool for running and managing LLM evaluations
     """
     pass
 

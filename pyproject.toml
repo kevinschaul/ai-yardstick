@@ -1,7 +1,7 @@
 [project]
 name = "llm-evals-cli"
 version = "0.1"
-description = "A CLI for running LLM evals with pydantic"
+description = "A CLI tool for running and managing LLM evaluations"
 readme = "README.md"
 authors = [{name = "Kevin Schaul"}]
 license = "MIT"

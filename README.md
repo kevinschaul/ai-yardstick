@@ -3,9 +3,9 @@
 [![PyPI](https://img.shields.io/pypi/v/llm-evals-cli.svg)](https://pypi.org/project/llm-evals-cli/)
 [![Changelog](https://img.shields.io/github/v/release/kevinschaul/llm-evals-cli?include_prereleases&label=changelog)](https://github.com/kevinschaul/llm-evals-cli/releases)
 [![Tests](https://github.com/kevinschaul/llm-evals-cli/actions/workflows/test.yml/badge.svg)](https://github.com/kevinschaul/llm-evals-cli/actions/workflows/test.yml)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/kevinschaul/llm-evals-cli/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/kevinschaul/llm-evals-cli/blob/master/LICENSE)
 
-A CLI for running LLM evals with pydantic
+A CLI tool for running and managing LLM evaluations
 
 ## Installation
 
