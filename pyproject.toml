@@ -1,5 +1,5 @@
 [project]
-name = "llm-evals-cli"
+name = "ai-yardstick"
 version = "0.1"
 description = "A CLI tool for running and managing LLM evaluations"
 readme = "README.md"
@@ -19,13 +19,13 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
-Homepage = "https://github.com/kevinschaul/llm-evals-cli"
-Changelog = "https://github.com/kevinschaul/llm-evals-cli/releases"
-Issues = "https://github.com/kevinschaul/llm-evals-cli/issues"
-CI = "https://github.com/kevinschaul/llm-evals-cli/actions"
+Homepage = "https://github.com/kevinschaul/ai-yardstick"
+Changelog = "https://github.com/kevinschaul/ai-yardstick/releases"
+Issues = "https://github.com/kevinschaul/ai-yardstick/issues"
+CI = "https://github.com/kevinschaul/ai-yardstick/actions"
 
 [project.scripts]
-llm-evals-cli = "llm_evals_cli.cli:cli"
+ai-yardstick = "ai_yardstick.cli:cli"
 
 [project.optional-dependencies]
 test = ["pytest"]

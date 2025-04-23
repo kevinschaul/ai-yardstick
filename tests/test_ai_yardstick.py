@@ -1,5 +1,5 @@
 from click.testing import CliRunner
-from llm_evals_cli.cli import cli
+from ai_yardstick.cli import cli
 
 
 def test_version():
