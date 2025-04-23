@@ -6,7 +6,7 @@ import hashlib
 import functools
 import importlib.util
 import time as import_time
-from typing import Any, Callable, Dict, TypeVar, cast
+from typing import Any, Callable, Dict, TypeVar, Optional, cast
 
 import yaml
 import llm
@@ -19,7 +19,7 @@ from pydantic_evals.evaluators import EqualsExpected
 
 T = TypeVar("T")
 # Base directory for cache; set to config file dir when running CLI
-CACHE_BASE_DIR: str | None = None
+CACHE_BASE_DIR: Optional[str] = None
 
 
 class JsonEncoder(json.JSONEncoder):
