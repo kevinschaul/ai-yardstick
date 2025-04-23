@@ -636,8 +636,6 @@ def create_template_files(eval_dir, eval_name):
     """Create template files for models, prompts, and tests."""
     # Create models.csv template
     models_content = """model
-# Add your models here, one per line
-claude-3.5-sonnet
 openai/gpt-4o-mini
 gemini-1.5-flash"""
     with open(os.path.join(eval_dir, "models.csv"), "w") as f:
@@ -646,12 +644,12 @@ gemini-1.5-flash"""
     # Create prompts.csv template
     prompts_content = """prompt
 "Your prompt here with {placeholder} for variables from test cases"
-# Add more prompts as needed, one per line"""
+Add more prompts as needed, one per line"""
     with open(os.path.join(eval_dir, "prompts.csv"), "w") as f:
         f.write(prompts_content)
 
     # Create tests.csv template
-    tests_content = """name,input_text,expected_output
+    tests_content = """placeholder,input_text,expected_output
 "test1","Sample input text","Expected output"
 "test2","Another sample input","Another expected output"
 # Add your test cases here"""
@@ -670,7 +668,7 @@ gemini-1.5-flash"""
 - tests.csv: Test cases with expected outputs
 
 ## Running
-Run with: `uv run cli/cli.py run {os.path.join("src/evals", eval_name, "ai-yardstick-config.yaml")}`
+Run with: `ai-yardstick run {os.path.join("src/evals", eval_name, "ai-yardstick-config.yaml")}`
 """
     with open(os.path.join(eval_dir, "index.md"), "w") as f:
         f.write(readme_content)
