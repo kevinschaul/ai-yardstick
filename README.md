@@ -29,6 +29,79 @@ Run an eval with:
 ai-yardstick run path/to/config.yaml
 ```
 
+## Configuration File
+
+A configuration file (YAML) defines your evaluation settings. Keys include:
+
+- `name`: Identifier for the evaluation.
+- `description`: Brief description of the evaluation.
+- `models`: Path to your `models.csv` file (relative to the config file).
+- `prompts`: Path to your `prompts.csv` file (relative to the config file).
+- `tests`: Path to your `tests.csv` file (relative to the config file).
+- `cache_dir`: (Optional) Directory to store LLM response cache. Defaults to `.ai-yardstick-cache`.
+- `output_dir`: (Optional) Directory for results. Defaults to `results`.
+- `results_file`: (Optional) Filename for detailed results CSV. Defaults to `results.csv`.
+- `aggregate_file`: (Optional) Filename for aggregate results CSV. Defaults to `aggregate.csv`.
+- `transform_func`: (Optional) Post-process LLM output. Can be:
+  - A built-in name, e.g. `parse_boolean`.
+  - A path to a Python file defining a function named `transform_output`.
+  - A dict spec `{file: "path.py", function: "func_name"}`.
+
+Example `ai-yardstick-config.yaml`:
+```yaml
+# Configuration for my evaluation
+name: myeval
+description: "Translate sentences to French"
+
+# Input files (CSV format)
+models: models.csv
+prompts: prompts.csv
+tests: tests.csv
+
+# Optional settings
+cache_dir: .ai-yardstick-cache
+output_dir: results
+results_file: detailed.csv
+aggregate_file: summary.csv
+
+# Optional transform function (convert YES/NO to boolean)
+transform_func: parse_boolean
+```
+
+## CSV File Formats
+
+ai-yardstick relies on three CSV inputs. All CSVs support an optional header row.
+
+### models.csv
+List of model identifiers, one per line. Header `model` is recommended but not required.
+```csv
+model
+openai/gpt-4
+claude-2
+my-llm-endpoint
+```
+
+### prompts.csv
+Prompt templates with placeholders matching test input column names. Header `prompt` is recommended.
+```csv
+prompt
+"Translate '{sentence}' to French"
+"Summarize: {paragraph}"
+```
+
+### tests.csv
+Test cases as rows. Each column (except `expected_output`) becomes an input variable in your prompt templates.
+The `expected_output` column holds the ground-truth for evaluation.
+```csv
+# Example with one input variable
+sentence,expected_output
+"Hello, world","Bonjour le monde"
+
+# Example with multiple inputs
+text,language,expected_output
+"Good morning","Spanish","Buenos días"
+```
+
 For help, run:
 ```bash
 ai-yardstick --help
