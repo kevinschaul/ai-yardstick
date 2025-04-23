@@ -10,6 +10,7 @@ def test_version():
         assert result.exit_code == 0
         assert result.output.startswith("cli, version ")
 
+
 def test_cli_create():
     runner = CliRunner()
     with runner.isolated_filesystem():
@@ -23,7 +24,7 @@ def test_cli_create():
         # Config file
         cfg = os.path.join(base, "ai-yardstick-config.yaml")
         assert os.path.isfile(cfg)
-        content = open(cfg, 'r').read()
+        content = open(cfg, "r").read()
         assert "name: myeval" in content
         assert "models: models.csv" in content
         # Template files

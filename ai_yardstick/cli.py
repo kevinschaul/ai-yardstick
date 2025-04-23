@@ -70,7 +70,6 @@ def cache(cache_dir: str = None):
     """
 
     def decorator(func: Callable[..., T]) -> Callable[..., T]:
-
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> T:
             # Use the provided cache_dir, or fall back to CONFIG_CACHE_DIR if set
@@ -106,7 +105,7 @@ def cache(cache_dir: str = None):
                         cached_data = json.load(f)
                         # Return just the result part of the cached data
                         return cast(T, cached_data["result"])
-                except (json.JSONDecodeError, KeyError) as e:
+                except (json.JSONDecodeError, KeyError):
                     # Handle corrupted cache file or missing result key
                     os.remove(cache_file)
 
@@ -485,7 +484,7 @@ def create(eval_name):
     create_template_files(eval_name, eval_name)
 
     click.echo(f"Created new evaluation in {eval_name}")
-    click.echo(f"Next steps:")
+    click.echo("Next steps:")
     click.echo(f"1. Add your models to {eval_name}/models.csv")
     click.echo(f"2. Add your prompts to {eval_name}/prompts.csv")
     click.echo(f"3. Add your test cases to {eval_name}/tests.csv")
@@ -558,7 +557,7 @@ def run(config_path):
     results.to_csv(results_path, index=False)
     aggregate_df.to_csv(aggregate_path)
 
-    click.echo(f"Evaluation complete. Results saved to:")
+    click.echo("Evaluation complete. Results saved to:")
     click.echo(f"  - Detailed results: {results_path}")
     click.echo(f"  - Aggregate results: {aggregate_path}")
 

@@ -74,11 +74,13 @@ ai-yardstick relies on three CSV inputs. All CSVs support an optional header row
 
 ### models.csv
 List of model identifiers, one per line. Header `model` is recommended but not required.
+
+Each model must be a valid [`llm` model](https://llm.datasette.io/) that is installed and set up on your system.
 ```csv
 model
-openai/gpt-4
-claude-2
-my-llm-endpoint
+openai/gpt-4o-mini
+claude-3.7-sonnet
+gemini-1.5-flash-latest
 ```
 
 ### prompts.csv
@@ -125,4 +127,12 @@ pip install -e '.[test]'
 To run the tests:
 ```bash
 python -m pytest
+```
+To run the tests and linters:
+```bash
+just
+```
+To fix linter issues:
+```bash
+just fix
 ```
